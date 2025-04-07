@@ -1,2 +1,2 @@
-﻿namespace Execute.Domain.Events;
-internal record ToDoCreated(int Id, string Title) : DomainEvent;
+﻿namespace Execute.Core.Events;
+internal record ToDoCreated(Guid Id, string Title) : DomainEvent;

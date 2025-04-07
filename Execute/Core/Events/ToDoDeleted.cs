@@ -1,4 +1,2 @@
-﻿using Execute.Domain.Events;
-
-namespace Execute.Core.Events;
-internal record ToDoDeleted(int Id) : DomainEvent;
+﻿namespace Execute.Core.Events;
+internal record ToDoDeleted(Guid Id) : DomainEvent;

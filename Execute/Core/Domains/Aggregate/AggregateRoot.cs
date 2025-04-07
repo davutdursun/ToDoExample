@@ -1,4 +1,4 @@
-﻿using Execute.Domain.Events;
+﻿using Execute.Core.Events;
 
 namespace Execute.Core.Domains.Aggregate;
 internal abstract class AggregateRoot : Domain

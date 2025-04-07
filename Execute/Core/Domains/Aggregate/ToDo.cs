@@ -1,5 +1,4 @@
 ﻿using Execute.Core.Events;
-using Execute.Domain.Events;
 
 namespace Execute.Core.Domains.Aggregate;
 internal class ToDo : AggregateRoot
@@ -9,7 +8,7 @@ internal class ToDo : AggregateRoot
     public bool IsDeleted { get; set; } = false;
     public ToDo() { }
 
-    public static ToDo Create(int id, string title)
+    public static ToDo Create(Guid id, string title)
     {
         var todo = new ToDo
         {
@@ -56,10 +55,10 @@ internal class ToDo : AggregateRoot
             case ToDoTitleChanged e:
                 Title = e.Title;
                 break;
-            case ToDoDeleted e:
+            case ToDoDeleted:
                 IsDeleted = true;
                 break;
-            case ToDoCompleted e:
+            case ToDoCompleted:
                 IsCompleted = true;
                 break;
         }

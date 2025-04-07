@@ -18,3 +18,10 @@ foreach (var @event in service.GetHistory(id))
 {
     Console.WriteLine($"{@event.EventId} - {@event.Timestamp} - {@event.GetType()}");
 }
+
+Console.WriteLine("\n\n");
+
+foreach (var @event in service.GetHistory(id2))
+{
+    Console.WriteLine($"{@event.EventId} - {@event.Timestamp} - {@event.GetType()}");
+}

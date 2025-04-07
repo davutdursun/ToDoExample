@@ -1,8 +1,8 @@
-﻿using Execute.Domain.Events;
+﻿using Execute.Core.Events;
 
 namespace Execute.Core.EventStore;
 internal interface IEventStore
 {
-    void Save(int aggregateId, IEnumerable<DomainEvent> events);
-    List<DomainEvent> GetEvents(int aggregateId);
+    void Save(Guid aggregateId, IEnumerable<DomainEvent> events);
+    List<DomainEvent> GetEvents(Guid aggregateId);
 }
