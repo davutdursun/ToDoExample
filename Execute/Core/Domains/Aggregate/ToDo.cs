@@ -15,7 +15,8 @@ internal class ToDo : AggregateRoot
             Id = id,
             Title = title
         };
-        todo.AddEvent(new ToDoCreated(id, title));
+        var @event = new ToDoCreated(id, title);
+        todo.AddEvent(@event);
         return todo;
     }
 
@@ -26,7 +27,9 @@ internal class ToDo : AggregateRoot
         if (title == Title)
             return;
         Title = title;
-        AddEvent(new ToDoTitleChanged(Id, title));
+        var @event = new ToDoTitleChanged(Id, title);
+        AddEvent(@event);
+        Apply(@event);
     }
 
     public void Complete()
@@ -34,14 +37,18 @@ internal class ToDo : AggregateRoot
         if (IsCompleted)
             return;
         IsCompleted = true;
-        AddEvent(new ToDoCompleted(Id));
+        var @event = new ToDoCompleted(Id);
+        AddEvent(@event);
+        Apply(@event);
     }
 
     public void Delete()
     {
         if (IsCompleted)
             throw new InvalidOperationException("Cannot delete a completed ToDo");
-        AddEvent(new ToDoDeleted(Id));
+        var @event = new ToDoDeleted(Id);
+        AddEvent(@event);
+        Apply(@event);
     }
 
     public void Apply(DomainEvent @event)
@@ -72,5 +79,10 @@ internal class ToDo : AggregateRoot
             todo.Apply(@event);
         }
         return todo;
+    }
+
+    public override string ToString()
+    {
+        return $"ToDo: {Id}, Title: {Title}, Completed: {IsCompleted}, Deleted: {IsDeleted}";
     }
 }

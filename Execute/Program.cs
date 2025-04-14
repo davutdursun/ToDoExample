@@ -1,4 +1,5 @@
-﻿using Execute.Core.EventStore;
+﻿using Execute.Core.Domains.Aggregate;
+using Execute.Core.EventStore;
 using Execute.Core.Services;
 
 var store = new InMemoryEventStore();
@@ -18,6 +19,8 @@ foreach (var @event in service.GetHistory(id))
 {
     Console.WriteLine($"{@event.EventId} - {@event.Timestamp} - {@event.GetType()}");
 }
+var obj1 = ToDo.Load(service.GetHistory(id));
+Console.WriteLine(obj1.ToString());
 
 Console.WriteLine("\n\n");
 
@@ -25,3 +28,6 @@ foreach (var @event in service.GetHistory(id2))
 {
     Console.WriteLine($"{@event.EventId} - {@event.Timestamp} - {@event.GetType()}");
 }
+
+var obj2 = ToDo.Load(service.GetHistory(id2));
+Console.WriteLine(obj2.ToString());
